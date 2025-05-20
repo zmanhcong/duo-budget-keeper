@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { getMonthlyExpenses, getCategoryTotals, getMonthlyTotal } from '@/lib/api';
 import { useAuth } from '@/hooks/useAuth';
-import { useToast } from '@/hooks/use-toast';
 import Layout from '@/components/Layout';
 import ExpenseList from '@/components/ExpenseList';
 import ExpenseSummary from '@/components/ExpenseSummary';
@@ -19,7 +18,6 @@ interface CategoryTotal {
 const DashboardPage = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const { user } = useAuth();
-  const { toast } = useToast();
   
   const year = selectedDate.getFullYear();
   const month = selectedDate.getMonth() + 1;
@@ -51,14 +49,6 @@ const DashboardPage = () => {
     queryKey: ['monthlyTotal', year, month],
     queryFn: () => getMonthlyTotal(year, month),
   });
-  
-  if (expensesError) {
-    toast({
-      title: 'Failed to load expenses',
-      description: 'There was an error loading your expenses. Please try again.',
-      variant: 'destructive',
-    });
-  }
   
   return (
     <Layout>

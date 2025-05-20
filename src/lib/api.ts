@@ -122,7 +122,11 @@ export const getCategoryTotals = async (year: number, month: number): Promise<{n
     return acc;
   }, {} as Record<string, number>);
   
-  return Object.entries(categoryTotals).map(([name, value]) => ({ name, value }));
+  // Sửa lỗi kiểu dữ liệu: đảm bảo giá trị value luôn là number
+  return Object.entries(categoryTotals).map(([name, value]) => ({ 
+    name, 
+    value: Number(value) 
+  }));
 };
 
 // Get total expenses for a specific month
