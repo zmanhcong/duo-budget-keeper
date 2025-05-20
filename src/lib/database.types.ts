@@ -1,5 +1,4 @@
 
-// This is a minimal type definition that will be expanded after you connect to Supabase
 export type Json =
   | string
   | number

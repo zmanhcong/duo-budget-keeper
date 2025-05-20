@@ -1,5 +1,4 @@
 
-import { useNavigate } from 'react-router-dom';
 import { supabase } from './supabase';
 
 export const signIn = async (email: string, password: string) => {

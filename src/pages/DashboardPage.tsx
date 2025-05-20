@@ -11,6 +11,11 @@ import MonthPicker from '@/components/MonthPicker';
 import TotalCard from '@/components/TotalCard';
 import { Wallet, PiggyBank, ArrowDown } from 'lucide-react';
 
+interface CategoryTotal {
+  name: string;
+  value: number;
+}
+
 const DashboardPage = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const { user } = useAuth();
@@ -33,7 +38,7 @@ const DashboardPage = () => {
   const {
     data: categoryTotals = [],
     isLoading: isLoadingCategoryTotals,
-  } = useQuery({
+  } = useQuery<CategoryTotal[]>({
     queryKey: ['categoryTotals', year, month],
     queryFn: () => getCategoryTotals(year, month),
   });
@@ -42,7 +47,7 @@ const DashboardPage = () => {
   const {
     data: monthlyTotal = 0,
     isLoading: isLoadingMonthlyTotal,
-  } = useQuery({
+  } = useQuery<number>({
     queryKey: ['monthlyTotal', year, month],
     queryFn: () => getMonthlyTotal(year, month),
   });

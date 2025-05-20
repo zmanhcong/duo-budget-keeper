@@ -46,6 +46,7 @@ const NewExpensePage = () => {
     
     mutation.mutate({
       ...data,
+      amount: Number(data.amount), // Ensure amount is a number
       user_id: user.id,
     });
   };

@@ -1,8 +1,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { PieChart, PieArcDatum } from 'recharts';
-import { PieChart as PieChartIcon } from 'lucide-react';
-import { ResponsiveContainer, Pie, Cell, Legend, Tooltip } from 'recharts';
+import { PieChartIcon } from 'lucide-react';
+import { ResponsiveContainer, PieChart, Pie, Cell, Legend, Tooltip } from 'recharts';
 
 interface CategoryTotal {
   name: string;

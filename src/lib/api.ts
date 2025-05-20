@@ -45,7 +45,7 @@ export const getMonthlyExpenses = async (year: number, month: number) => {
     throw error;
   }
 
-  return data;
+  return data || [];
 };
 
 // Get a specific expense by ID
@@ -109,7 +109,7 @@ export const deleteExpense = async (id: string) => {
 };
 
 // Get category totals for a specific month
-export const getCategoryTotals = async (year: number, month: number) => {
+export const getCategoryTotals = async (year: number, month: number): Promise<{name: string, value: number}[]> => {
   const expenses = await getMonthlyExpenses(year, month);
   
   // Group by category and sum amounts
@@ -118,7 +118,7 @@ export const getCategoryTotals = async (year: number, month: number) => {
     if (!acc[category]) {
       acc[category] = 0;
     }
-    acc[category] += expense.amount;
+    acc[category] += Number(expense.amount);
     return acc;
   }, {} as Record<string, number>);
   
@@ -126,7 +126,7 @@ export const getCategoryTotals = async (year: number, month: number) => {
 };
 
 // Get total expenses for a specific month
-export const getMonthlyTotal = async (year: number, month: number) => {
+export const getMonthlyTotal = async (year: number, month: number): Promise<number> => {
   const expenses = await getMonthlyExpenses(year, month);
-  return expenses.reduce((total, expense) => total + expense.amount, 0);
+  return expenses.reduce((total, expense) => total + Number(expense.amount), 0);
 };
